@@ -1,6 +1,9 @@
-from .pips import Pips
+from src.pips import Pips
 
 class Yatzy:
+    
+    ZERO_POINTS = 0
+    FIFTY_POINTS = 50
 
     @staticmethod
     def chance_score(*dice):
@@ -10,33 +13,30 @@ class Yatzy:
     Common Refactorings: Replace Temp with Query
     """
 
-  
- 
     @staticmethod
     def yatzy(dice):
-        counts = [0] * (len(dice) + 1)
+        dice_value_frequencies = [0] * (len(dice) + 1)
         for die in dice:
-            counts[die - 1] += 1
-        for i in range(len(counts)):
-            if counts[i] == 5:
-                return 50
-        return 0
+            dice_value_frequencies[die - 1] += 1
+        for frequency in range(len(dice_value_frequencies)):
+            if dice_value_frequencies[frequency] == 5:
+                return Yatzy.FIFTY_POINTS
+        return Yatzy.ZERO_POINTS
+    """
+    Smell: Primitive Obsession
+    Common Refactorings: Replace Primitive with Object
+    Smell: Rename Variable
+    Common Refactorings: Mysterious Name
+    """
+  
+    
 
     @staticmethod
-    def ones(d1, d2, d3, d4, d5):
-        sum = 0
-        if (d1 == 1):
-            sum += 1
-        if (d2 == 1):
-            sum += 1
-        if (d3 == 1):
-            sum += 1
-        if (d4 == 1):
-            sum += 1
-        if (d5 == 1):
-            sum += 1
-
-        return sum
+    def ones(*dice):
+        ONE = Pips.ONE.value
+        return dice.count(ONE) * ONE
+     
+      
 
     @staticmethod
     def twos(d1, d2, d3, d4, d5):
