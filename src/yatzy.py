@@ -1,14 +1,17 @@
+from .pips import Pips
+
 class Yatzy:
 
     @staticmethod
-    def chance_score(dice1, dice2, dice3, dice4, dice5):
-     return dice1 + dice2 + dice3 + dice4 + dice5 
+    def chance_score(*dice):
+        return sum(dice)
     """
-    Smell: Long Function
+     Smell: Long Function
     Common Refactorings: Replace Temp with Query
     """
 
-
+  
+ 
     @staticmethod
     def yatzy(dice):
         counts = [0] * (len(dice) + 1)
