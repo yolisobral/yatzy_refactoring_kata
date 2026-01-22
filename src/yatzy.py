@@ -35,76 +35,79 @@ class Yatzy:
     def ones(*dice):
         ONE = Pips.ONE.value
         return dice.count(ONE) * ONE
-     
+    """
+    Smell: Loops
+    Common Refactorings: Replace Loop with Pipeline
+    Smell: Long Parameter List
+    Common Refactorings: Introduce Parameter Object
+    """
       
 
     @staticmethod
-    def twos(d1, d2, d3, d4, d5):
-        sum = 0
-        if (d1 == 2):
-            sum += 2
-        if (d2 == 2):
-            sum += 2
-        if (d3 == 2):
-            sum += 2
-        if (d4 == 2):
-            sum += 2
-        if (d5 == 2):
-            sum += 2
-        return sum
+    def twos(*dice):
+        TWO = Pips.TWO.value
+        return dice.count(TWO) * TWO
+    """
+    Smell: Loops
+    Common Refactorings: Replace Loop with Pipeline
+    Smell: Long Parameter List
+    Common Refactorings: Introduce Parameter Object
+    """
+
 
     @staticmethod
-    def threes(d1, d2, d3, d4, d5):
-        s = 0
-        if (d1 == 3):
-            s += 3
-        if (d2 == 3):
-            s += 3
-        if (d3 == 3):
-            s += 3
-        if (d4 == 3):
-            s += 3
-        if (d5 == 3):
-            s += 3
-        return s
+    def threes(*dice):
+        THREE = Pips.THREE.value
+        return dice.count(THREE) * THREE
+    """
+    Smell: Loops
+    Common Refactorings: Replace Loop with Pipeline
+    Smell: Long Parameter List
+    Common Refactorings: Introduce Parameter Object
+    """
 
-    def __init__(self, d1=0, d2=0, d3=0, d4=0, _5=0):
-        self.dice = [0] * 5
-        self.dice[0] = d1
-        self.dice[1] = d2
-        self.dice[2] = d3
-        self.dice[3] = d4
-        self.dice[4] = _5
+    @staticmethod
+    def fours(*dice):
+        FOUR = Pips.FOUR.value
+        return dice.count(FOUR) * FOUR
+    """
+    Smell: Loops
+    Common Refactorings: Replace Loop with Pipeline
+    Smell: Long Parameter List
+    Common Refactorings: Introduce Parameter Object
+    """
+    
 
-    def fours(self):
-        sum = 0
-        for at in range(5):
-            if (self.dice[at] == 4):
-                sum += 4
-        return sum
+    @staticmethod
+    def fives(*dice):
+        FIVE = Pips.FIVE.value
+        return dice.count(FIVE) * FIVE
+    """
+    Smell: Loops
+    Common Refactorings: Replace Loop with Pipeline
+    Smell: Long Parameter List
+    Common Refactorings: Introduce Parameter Object
+    """
 
-    def fives(self):
-        s = 0
-        i = 0
-        for i in range(len(self.dice)):
-            if (self.dice[i] == 5):
-                s = s + 5
-        return s
-
-    def sixes(self):
-        sum = 0
-        for at in range(len(self.dice)):
-            if (self.dice[at] == 6):
-                sum = sum + 6
-        return sum
-
-    def score_pair(self, d1, d2, d3, d4, d5):
+    @staticmethod
+    def sixes(*dice):
+        SIX = Pips.SIX.value
+        return dice.count(SIX) * SIX
+    """
+    Smell: Loops
+    Common Refactorings: Replace Loop with Pipeline
+    Smell: Long Parameter List
+    Common Refactorings: Introduce Parameter Object
+    """
+    
+    @staticmethod
+    def score_pair(*dice):
         counts = [0] * 6
-        counts[d1 - 1] += 1
-        counts[d2 - 1] += 1
-        counts[d3 - 1] += 1
-        counts[d4 - 1] += 1
-        counts[d5 - 1] += 1
+        counts[dice[0] - 1] += 1
+        counts[dice[1] - 1] += 1
+        counts[dice[2] - 1] += 1
+        counts[dice[3] - 1] += 1
+        counts[dice[4] - 1] += 1
         at = 0
         for at in range(6):
             if (counts[6 - at - 1] == 2):
