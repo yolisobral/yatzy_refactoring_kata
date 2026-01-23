@@ -53,7 +53,7 @@ def test_sixes_test():
     assert 18 == Yatzy.sixes(6, 5, 6, 6, 5)
 
 
-def test_one_pair():
+def test_score_pair():
     assert 6 == Yatzy.score_pair(3, 4, 3, 5, 6)
     assert 10 == Yatzy.score_pair(5, 3, 3, 3, 5)
     assert 12 == Yatzy.score_pair(5, 3, 6, 6, 5)

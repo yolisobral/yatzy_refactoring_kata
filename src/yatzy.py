@@ -4,6 +4,8 @@ class Yatzy:
     
     ZERO_POINTS = 0
     FIFTY_POINTS = 50
+    NUMBER_OF_DICE = 5
+    NUMBER_OF_FACES = 6
 
     @staticmethod
     def chance_score(*dice):
@@ -15,12 +17,12 @@ class Yatzy:
 
     @staticmethod
     def yatzy(dice):
-        dice_value_frequencies = [0] * (len(dice) + 1)
-        for die in dice:
-            dice_value_frequencies[die - 1] += 1
-        for frequency in range(len(dice_value_frequencies)):
-            if dice_value_frequencies[frequency] == 5:
-                return Yatzy.FIFTY_POINTS
+        dice_value_frequencies = [0] * (len(dice) + 1) #Initialize frequency list
+        for die in dice: #Count occurrences of each die value
+            dice_value_frequencies[die - 1] += 1 #Increment count for this die value
+        for frequency in range(len(dice_value_frequencies)): #Check for Yatzy condition
+            if dice_value_frequencies[frequency] == 5: #If any die value appears 5 times
+                return Yatzy.FIFTY_POINTS #Return Yatzy score
         return Yatzy.ZERO_POINTS
     """
     Smell: Primitive Obsession
@@ -32,9 +34,9 @@ class Yatzy:
     
 
     @staticmethod
-    def ones(*dice):
-        ONE = Pips.ONE.value
-        return dice.count(ONE) * ONE
+    def ones(*dice): # Calculate score for ones
+        ONE = Pips.ONE.value #Get the pip value for ones
+        return dice.count(ONE) * ONE #Count and multiply by pip value
     """
     Smell: Loops
     Common Refactorings: Replace Loop with Pipeline
@@ -102,17 +104,30 @@ class Yatzy:
     
     @staticmethod
     def score_pair(*dice):
-        counts = [0] * 6
-        counts[dice[0] - 1] += 1
-        counts[dice[1] - 1] += 1
-        counts[dice[2] - 1] += 1
-        counts[dice[3] - 1] += 1
-        counts[dice[4] - 1] += 1
-        at = 0
-        for at in range(6):
-            if (counts[6 - at - 1] == 2):
-                return (6 - at) * 2
-        return 0
+       dice = sorted(dice, reverse=True) # Sort dice in descending order
+       for value in Pips.reversedValues(): # Iterate from highest to lowest pip value
+           if dice.count(value) >= Pips.TWO.value: # Check if there are at least two of this value
+               return value * Pips.TWO.value # Return the score for the pair
+       return Yatzy.ZERO_POINTS
+   
+    """
+    Smell: Long Function
+    Common Refactorings: Extract Function 
+    """ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     @staticmethod
     def two_pair(d1, d2, d3, d4, d5):
