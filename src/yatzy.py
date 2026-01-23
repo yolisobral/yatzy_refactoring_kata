@@ -115,9 +115,20 @@ class Yatzy:
     Common Refactorings: Extract Function 
     """ 
 
-
-
-
+    @staticmethod
+    def two_pair(*dice):
+        dice = sorted(dice, reverse=True)
+        for value in Pips.reversedValues():
+          if dice.count(value) >= Pips.TWO.value:
+               pair_count += Pips.ONE.value
+        score += value * Pips.TWO.value
+        if pair_count == Pips.TWO.value: # Check if two pairs were found
+                    return score
+        return Yatzy.ZERO_POINTS
+    """
+    Smell: Long Function
+    Common Refactorings: Extract Function        
+    """
 
 
 
