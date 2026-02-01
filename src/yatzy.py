@@ -6,6 +6,8 @@ class Yatzy:
     FIFTY_POINTS = 50
     NUMBER_OF_DICE = 5
     NUMBER_OF_FACES = 6
+    SMALL_STRAIGHT_SCORE = 15
+
 
     @staticmethod
     def chance_score(*dice): 
@@ -152,22 +154,36 @@ class Yatzy:
        Smell: Primitive Obsession Common Refactorings: Replace Primitive with Object
        """
 
+    @staticmethod
+    def _count_dice(dice):
+        tallies = [Yatzy.ZERO_POINTS] * Yatzy.NUMBER_OF_FACES
+        for die in dice:
+            tallies[die - Pips.ONE.value] += Pips.ONE.value
+        return tallies
+        """
+        Smell: Temporary Variables
+        Common Refactorings: Replace Temp with Query
+
+        Smell: Duplicated Code
+        Common Refactorings: Extract Function
+        """
+
+   
 
     @staticmethod
-    def smallStraight(d1, d2, d3, d4, d5):
-        tallies = [0] * 6
-        tallies[d1 - 1] += 1
-        tallies[d2 - 1] += 1
-        tallies[d3 - 1] += 1
-        tallies[d4 - 1] += 1
-        tallies[d5 - 1] += 1
-        if (tallies[0] == 1 and
-                tallies[1] == 1 and
-                tallies[2] == 1 and
-                tallies[3] == 1 and
-                tallies[4] == 1):
-            return 15
-        return 0
+    def smallStraight(*dice):
+        tallies = Yatzy._count_dice(dice)
+        required = [1, 1, 1, 1, 1, 0] # 1–5 straight 
+        if all(tallies[i] == required[i] for i in range(len(required))): 
+            return Yatzy.SMALL_STRAIGHT_SCORE       
+        return Yatzy.ZERO_POINTS    
+    """ 
+    Smell: Duplicated Code Common Refactorings: Extract Function 
+    Smell: Magic Numbers Common Refactorings: Replace Magic Number with Symbolic Constant 
+    """
+ 
+    
+
 
     @staticmethod
     def largeStraight(d1, d2, d3, d4, d5):
