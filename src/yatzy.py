@@ -140,17 +140,21 @@ class Yatzy:
 
 
 
+    @staticmethod
+    def four_of_a_kind(*dice):
+       tallies = Yatzy._count_dice(dice) 
+       for pip_value in range(len(tallies)):
+         if tallies[pip_value] >= Pips.FOUR.value: return (pip_value + 1) * Pips.FOUR.value 
+         return Yatzy.ZERO_POINTS
+       """ 
+       Smell: Long Parameter List Common Refactorings: Introduce Parameter Object 
+       Smell: Duplicated Code Common Refactorings: Extract Function
+       Smell: Primitive Obsession Common Refactorings: Replace Primitive with Object
+       """
+
 
     @staticmethod
-    def four_of_a_kind():
-
-
-       
-
-
-
-     @staticmethod
-     def smallStraight(d1, d2, d3, d4, d5):
+    def smallStraight(d1, d2, d3, d4, d5):
         tallies = [0] * 6
         tallies[d1 - 1] += 1
         tallies[d2 - 1] += 1
