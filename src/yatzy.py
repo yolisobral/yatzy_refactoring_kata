@@ -185,21 +185,19 @@ class Yatzy:
     
 
 
-    @staticmethod
-    def largeStraight(d1, d2, d3, d4, d5):
-        tallies = [0] * 6
-        tallies[d1 - 1] += 1
-        tallies[d2 - 1] += 1
-        tallies[d3 - 1] += 1
-        tallies[d4 - 1] += 1
-        tallies[d5 - 1] += 1
-        if (tallies[1] == 1 and
-                tallies[2] == 1 and
-                tallies[3] == 1 and
-                tallies[4] == 1
-                and tallies[5] == 1):
-            return 20
-        return 0
+@staticmethod
+def largeStraight(*dice):
+    tallies = Yatzy._count_dice(dice)
+    required = [0, 1, 1, 1, 1, 1]  # 2 a 6
+    if all(tallies[i] == required[i] for i in range(len(required))):
+        return Yatzy.chance_score(*dice)
+    return Yatzy.ZERO_POINTS
+    """
+    Refactoring: Replacing manual counting with _count_dice and set operations
+    Smell: Duplicated Code / Magic Numbers
+    Common Refactorings: Extract Function, Replace Magic Number with Symbolic Constant
+    """
+
 
     @staticmethod
     def fullHouse(d1, d2, d3, d4, d5):
